@@ -1,0 +1,24 @@
+<script src="app.component.ts"></script> 
+
+<form ng-submit="_send()">
+<input type="text" placeholder="votre message">
+<input type="submit" placeholder="envoyer">
+</form>
+
+<div>
+  <table>
+    <tbody>
+    <tr *ngFor="let message of serverMessages">
+      <td>
+        user:
+      </td>
+      <td>
+          {{ message.message }}
+      </td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+
+
