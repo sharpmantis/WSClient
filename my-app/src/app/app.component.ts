@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { WebSocketSubject } from 'rxjs/webSocket'
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +12,7 @@ import { WebSocketSubject } from 'rxjs/webSocket'
 export class AppComponent {
   title = 'my-app';
 
+  public userInput: any;
 
   //instance d'un observable WebSocket
   private _socket: WebSocketSubject<any>;
@@ -38,9 +41,10 @@ export class AppComponent {
       );
   }
 
-  private _send(): void {
+  public _send(): void {
   console.log('envoie un nouveau message vers le serveur');
-  this._socket.next('Bonjour Serveur, je peux jouer?');
+  this._socket.next(this.userInput);
+  this.userInput="";
   }
 
 }
