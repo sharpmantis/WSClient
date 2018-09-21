@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'my-app';
 
   public userInput: any;
+  public pseudo: any;
 
   //instance d'un observable WebSocket
   private _socket: WebSocketSubject<any>;
@@ -33,8 +34,10 @@ export class AppComponent {
 
     this._socket
       .subscribe((message) => {
-        console.log('le serveur envoie ' + JSON.stringify(message));
+        console.log('le serveur envoie '+ JSON.stringify(message));
+        
         this.serverMessages.push(message);
+        
       },
         (err) => console.error('erreur levée: ' + JSON.stringify(err)),
         () => console.warn('completed')
@@ -42,8 +45,12 @@ export class AppComponent {
   }
 
   public _send(): void {
+    const _envelop: any = {};
+    _envelop.pseudo = this.pseudo;
+    _envelop.message = this.userInput;
+
   console.log('envoie un nouveau message vers le serveur');
-  this._socket.next(this.userInput);
+  this._socket.next(_envelop);
   this.userInput="";
   }
 

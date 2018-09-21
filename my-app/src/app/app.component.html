@@ -66,7 +66,9 @@
 
                         <h5>Manu Le Grand</h5>
                         <tr *ngFor="let message of serverMessages">
-
+                            <td>
+                                {{ message.pseudo}} :
+                            </td>
                             <td>
                                 {{ message.message }}
                             </td>
@@ -83,11 +85,11 @@
 
             </div> <!-- end chat-history -->
 
-            
+
             <form action="#" method="post">
 
                 <form (submit)="_send()">
-
+                    <input name="pseudo" type="text" [(ngModel)]="pseudo" placeholder="votre message" autofocus>
                     <input name="input" type="text" [(ngModel)]="userInput" placeholder="votre message" autofocus>
                     <input type="submit" placeholder="envoyer">
 
