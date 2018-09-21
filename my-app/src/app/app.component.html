@@ -1,32 +1,4 @@
-<!--
-<script src="app.component.ts"></script> 
-
-<div>
-  <table>
-    <tbody>
-    <tr *ngFor="let message of serverMessages">
-      <td>
-        user:
-      </td>
-      <td>
-          {{ message.message }}
-      </td>
-    </tr>
-  </tbody>
-  </table>
-</div>
-
-<form type="text"  (submit)="_send()">
-    <input  
-    name="input" 
-    type="text" 
-    [(ngModel)]="userInput" 
-    placeholder="votre message" 
-    > 
-    <input type="submit" placeholder="envoyer" >
-    </form>
-  -->
-<html lang="en">
+<html lang="fr">
 <script src="app.component.ts"></script>
 
 <head>
@@ -39,70 +11,44 @@
 </head>
 
 <body>
+    <!-- mon formulaire de pseudo-->
+    <form id="formPseudo">
+        <input name="pseudo" type="text" [(ngModel)]="pseudo" placeholder="votre pseudo" required maxlength="12"
+            autofocus>
+        <input type="submit" placeholder="envoyer">
+    </form>
 
-    <div id="live-chat">
+    <!--la fenetre de tchat générale-->
 
-        <header class="clearfix">
-
-            <a href="#" class="chat-close">x</a>
-
-            <h4>John Doe</h4>
-
-            <span class="chat-message-counter">3</span>
-
+    <div id="fenetreGenerale">
+        <header>
+            <h4>Canal public</h4>
         </header>
 
-        <div class="chat">
+    <!-- Le tchat en lui-meme-->
+        <div id="chat" class="chat">
+            <div id="ListeMessages" class="listeMessages">
+                <h5>salon #1</h5>
 
-            <div id="chat-history" class="chat-history">
+                <tr  *ngFor="let message of serverMessages">
+                    <td id="IDext" class ="messagesExt"  *ngIf="message.pseudo != pseudo">
+                        {{ message.pseudo }} : {{ message.message }}
+                    </td>
+                    
+                    <td id="IDint" class="messagesInt" *ngIf="message.pseudo == pseudo">
+                        Vous : {{ message.message }}
+                    </td>
+                </tr>
+                </div>
 
-                <div class="chat-message clearfix">
-
-                    <img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">
-
-                    <div class="chat-message-content clearfix">
-
-                        <span class="chat-time">13:35</span>
-
-                        <h5>Manu Le Grand</h5>
-                        <tr *ngFor="let message of serverMessages">
-                            <td>
-                                {{ message.pseudo}} :
-                            </td>
-                            <td>
-                                {{ message.message }}
-                            </td>
-
-                            <!-- <tr *ngFor="let message of serverMessages"></tr>
-
-                        <p>{{ message.message }}</p> -->
-
-                    </div> <!-- end chat-message-content -->
-
-                </div> <!-- end chat-message -->
-
-                <hr>
-
-            </div> <!-- end chat-history -->
-
-
-            <form action="#" method="post">
-
-                <form (submit)="_send()">
-                    <input name="pseudo" type="text" [(ngModel)]="pseudo" placeholder="votre message" autofocus>
+            <form id="SaisieMessages" action="#" method="post" (submit)="_send()">
                     <input name="input" type="text" [(ngModel)]="userInput" placeholder="votre message" autofocus>
-                    <input type="submit" placeholder="envoyer">
-
-                </form>
-
+                    <button type="submit">envoyer</button>
             </form>
-
         </div> <!-- end chat -->
-
     </div> <!-- end live-chat -->
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-
 </body>
 
 </html>
